@@ -2,6 +2,12 @@
 - hosts: test-server
   become: true
   tasks:
+  - name: Stop existing container (if running)
+    shell: "docker stop insure-me || true"
+
+  - name: Remove existing container (if exists)
+    shell: "docker rm insure-me || true"
+  
   - name: update apt
     command: sudo apt-get update
 
